@@ -21,8 +21,10 @@ Current bindings:
 - `<modifier> + t`: open a new tab
 - `<modifier> + q`: close the current tab
 - `<modifier> + f`: toggle window maximize without entering fullscreen
+- `<modifier> + Left`: switch to the previous tab
+- `<modifier> + Right`: switch to the next tab
 
-On macOS, closing the last WezTerm window does not quit the application.
+On macOS, closing the last WezTerm window does not quit the application. The macOS config also enables window transparency, background blur, and 13pt terminal text.
 
 ## Install
 
