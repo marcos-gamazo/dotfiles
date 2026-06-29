@@ -10,16 +10,29 @@ config.color_scheme = 'rose-pine-moon'
 config.max_fps = 120
 config.font = wezterm.font("Hack Nerd Font")
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
-config.window_background_opacity = 0.8
 config.window_frame = {
   font = wezterm.font("Hack Nerd Font", { weight = "DemiBold" }),
-  font_size = 13.0,
+}
+config.colors = {
+  tab_bar = {
+    active_tab = {
+      bg_color = "#ffd700",
+      fg_color = "#191724",
+    },
+  },
 }
 config.quit_when_all_windows_are_closed = false
 config.inactive_pane_hsb = {
   saturation = 0.0,
   brightness = 0.5,
 }
+
+if is_macos then
+  config.window_background_opacity = 0.8
+  config.macos_window_background_blur = 50
+  config.font_size = 13.0
+  config.window_frame.font_size = 13.0
+end
 
 --keys
 local is_window_maximized = false
@@ -42,5 +55,13 @@ config.keys = {
   { key = 'q', mods = modifier, action = act.CloseCurrentTab{ confirm = true } },
   { key = 'f', mods = modifier, action = toggle_maximize_window },
 }
+
+if is_macos then
+  table.insert(config.keys, { key = "LeftArrow", mods = "CMD", action = act.ActivateTabRelative(-1) })
+  table.insert(config.keys, { key = "RightArrow", mods = "CMD", action = act.ActivateTabRelative(1) })
+else
+  table.insert(config.keys, { key = "LeftArrow", mods = "CTRL", action = act.ActivateTabRelative(-1) })
+  table.insert(config.keys, { key = "RightArrow", mods = "CTRL", action = act.ActivateTabRelative(1) })
+end
 
 return config
