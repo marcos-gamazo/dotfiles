@@ -14,6 +14,8 @@ config.window_frame = {
   font = wezterm.font("Hack Nerd Font", { weight = "DemiBold" }),
 }
 config.colors = {
+  selection_bg = "#f28e0b",
+  selection_fg = "#191724",
   tab_bar = {
     active_tab = {
       bg_color = "#ffd700",
@@ -22,6 +24,7 @@ config.colors = {
   },
 }
 config.quit_when_all_windows_are_closed = false
+config.window_background_opacity = 0.95
 config.inactive_pane_hsb = {
   saturation = 0.0,
   brightness = 0.5,
@@ -52,16 +55,11 @@ config.keys = {
   { key = "v", mods = modifier, action = act.PasteFrom('Clipboard') },
   { key = 'c', mods = modifier, action = act.CopyTo('Clipboard') },
   { key = 't', mods = modifier, action = act.SpawnTab('CurrentPaneDomain') },
-  { key = 'q', mods = modifier, action = act.CloseCurrentTab{ confirm = true } },
+  { key = 'q', mods = modifier, action = act.CloseCurrentTab },
   { key = 'f', mods = modifier, action = toggle_maximize_window },
 }
 
-if is_macos then
-  table.insert(config.keys, { key = "LeftArrow", mods = "CMD", action = act.ActivateTabRelative(-1) })
-  table.insert(config.keys, { key = "RightArrow", mods = "CMD", action = act.ActivateTabRelative(1) })
-else
-  table.insert(config.keys, { key = "LeftArrow", mods = "CTRL", action = act.ActivateTabRelative(-1) })
-  table.insert(config.keys, { key = "RightArrow", mods = "CTRL", action = act.ActivateTabRelative(1) })
-end
+table.insert(config.keys, { key = "LeftArrow", mods = modifier, action = act.ActivateTabRelative(-1) })
+table.insert(config.keys, { key = "RightArrow", mods = modifier, action = act.ActivateTabRelative(1) })
 
 return config
