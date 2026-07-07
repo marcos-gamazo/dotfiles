@@ -55,11 +55,11 @@ config.keys = {
   { key = "v", mods = modifier, action = act.PasteFrom('Clipboard') },
   { key = 'c', mods = modifier, action = act.CopyTo('Clipboard') },
   { key = 't', mods = modifier, action = act.SpawnTab('CurrentPaneDomain') },
-  { key = 'q', mods = modifier, action = act.CloseCurrentTab },
+  { key = 'q', mods = modifier, action = act.CloseCurrentTab{ confirm = true } },
   { key = 'f', mods = modifier, action = toggle_maximize_window },
 }
 
-table.insert(config.keys, { key = "LeftArrow", mods = modifier, action = act.ActivateTabRelative(-1) })
-table.insert(config.keys, { key = "RightArrow", mods = modifier, action = act.ActivateTabRelative(1) })
+table.insert(config.keys, { key = "LeftArrow", mods = "ALT", action = act.ActivateTabRelative(-1) })
+table.insert(config.keys, { key = "RightArrow", mods = "ALT", action = act.ActivateTabRelative(1) })
 
 return config
